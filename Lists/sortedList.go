@@ -1,5 +1,7 @@
 package Lists
 
+import "fmt"
+
 func myfindMiddle(l *SortedLinkedList, a **SortedLinkedList, b **SortedLinkedList) {
 	slow := l
 	fast := l.Next
