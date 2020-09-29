@@ -4,14 +4,14 @@ import "fmt"
 
 //LinkedList is a type
 type LinkedList struct {
-	val  int
-	next *LinkedList
+	Val  int
+	Next *LinkedList
 }
 
 //SortedLinkedList is a type
 type SortedLinkedList struct {
-	val  int
-	next *SortedLinkedList
+	Val  int
+	Next *SortedLinkedList
 }
 
 type list interface {
@@ -29,11 +29,11 @@ func (l *LinkedList) extractMax() int {
 	var i int
 	head := *l
 	for l != nil {
-		if max < l.val {
-			max = l.val
+		if max < l.Val {
+			max = l.Val
 			index = i
 		}
-		l = l.next
+		l = l.Next
 		i++
 
 	}
@@ -48,11 +48,11 @@ func (l *LinkedList) extractMin() int {
 	var i int
 	head := *l
 	for l != nil {
-		if min > l.val {
-			min = l.val
+		if min > l.Val {
+			min = l.Val
 			index = i
 		}
-		l = l.next
+		l = l.Next
 		i++
 
 	}
@@ -61,11 +61,11 @@ func (l *LinkedList) extractMin() int {
 
 }
 
-func (l *LinkedList) add(val int) {
-	if (*l).next != nil {
-		(*l).next.add(val)
+func (l *LinkedList) add(Val int) {
+	if (*l).Next != nil {
+		(*l).Next.add(Val)
 	} else {
-		(*l).next = &LinkedList{val: val, next: nil}
+		(*l).Next = &LinkedList{Val: Val, Next: nil}
 	}
 
 }
@@ -73,7 +73,7 @@ func (l *LinkedList) add(val int) {
 func (l *LinkedList) delete(index int) {
 
 	if index == 0 {
-		c := ((*l).next)
+		c := ((*l).Next)
 		*l = *c
 		return
 	}
@@ -81,39 +81,39 @@ func (l *LinkedList) delete(index int) {
 	var prev *LinkedList
 	for i := 0; i < index; i++ {
 		prev = n
-		n = (*n).next
+		n = (*n).Next
 	}
-	(*prev).next = (*n).next
+	(*prev).Next = (*n).Next
 
 }
 func (l *LinkedList) display() {
 	fmt.Println()
 	for l != nil {
-		fmt.Printf("%d ", (*l).val)
-		l = l.next
+		fmt.Printf("%d ", (*l).Val)
+		l = l.Next
 	}
 }
 func findMiddle(l *LinkedList, a **LinkedList, b **LinkedList) {
 	slow := l
-	fast := l.next
+	fast := l.Next
 	for fast != nil {
-		fast = (*fast).next
+		fast = (*fast).Next
 		if fast != nil {
-			fast = (*fast).next
-			slow = (*slow).next
+			fast = (*fast).Next
+			slow = (*slow).Next
 		}
 	}
 	*a = l
-	**b = *slow.next
-	slow.next = nil
+	**b = *slow.Next
+	slow.Next = nil
 
 }
 
 func sort(l *LinkedList) *LinkedList {
 
-	if l.next != nil {
+	if l.Next != nil {
 		var a *LinkedList
-		var b *LinkedList = &LinkedList{val: 1, next: nil}
+		var b *LinkedList = &LinkedList{Val: 1, Next: nil}
 		findMiddle(l, &a, &b)
 
 		firsthalf := sort(a)
@@ -121,28 +121,28 @@ func sort(l *LinkedList) *LinkedList {
 
 		var x *LinkedList = firsthalf
 		var y *LinkedList = secondhalf
-		var merged *LinkedList = &LinkedList{val: 0, next: nil}
+		var merged *LinkedList = &LinkedList{Val: 0, Next: nil}
 		head := merged
 		for x != nil && y != nil {
-			if (*x).val < (*y).val {
-				(merged).next = &LinkedList{val: (*x).val, next: nil}
-				merged = merged.next
-				x = x.next
+			if (*x).Val < (*y).Val {
+				(merged).Next = &LinkedList{Val: (*x).Val, Next: nil}
+				merged = merged.Next
+				x = x.Next
 			} else {
-				(merged).next = &LinkedList{val: (*y).val, next: nil}
-				merged = merged.next
-				y = y.next
+				(merged).Next = &LinkedList{Val: (*y).Val, Next: nil}
+				merged = merged.Next
+				y = y.Next
 			}
 
 		}
 		if x != nil {
-			merged.next = x
+			merged.Next = x
 
 		} else if y != nil {
-			merged.next = y
+			merged.Next = y
 		}
 
-		return (head.next)
+		return (head.Next)
 	}
 	return l
 
@@ -150,14 +150,14 @@ func sort(l *LinkedList) *LinkedList {
 func (l *LinkedList) sort() *SortedLinkedList {
 	*l = *sort(l)
 
-	var h *SortedLinkedList = &SortedLinkedList{val: 0, next: nil}
+	var h *SortedLinkedList = &SortedLinkedList{Val: 0, Next: nil}
 	var head *SortedLinkedList = h
 	for l != nil {
-		h.next = &SortedLinkedList{val: l.val, next: nil}
-		h = h.next
-		l = l.next
+		h.Next = &SortedLinkedList{Val: l.Val, Next: nil}
+		h = h.Next
+		l = l.Next
 	}
-	return head.next
+	return head.Next
 
 }
 
@@ -165,25 +165,25 @@ func (l *LinkedList) sort() *SortedLinkedList {
 
 func myfindMiddle(l *SortedLinkedList, a **SortedLinkedList, b **SortedLinkedList) {
 	slow := l
-	fast := l.next
+	fast := l.Next
 	for fast != nil {
-		fast = (*fast).next
+		fast = (*fast).Next
 		if fast != nil {
-			fast = (*fast).next
-			slow = (*slow).next
+			fast = (*fast).Next
+			slow = (*slow).Next
 		}
 	}
 	*a = l
-	**b = *slow.next
-	slow.next = nil
+	**b = *slow.Next
+	slow.Next = nil
 
 }
 
 func mysort(l *SortedLinkedList) *SortedLinkedList {
 
-	if l.next != nil {
+	if l.Next != nil {
 		var a *SortedLinkedList
-		var b *SortedLinkedList = &SortedLinkedList{val: 1, next: nil}
+		var b *SortedLinkedList = &SortedLinkedList{Val: 1, Next: nil}
 		myfindMiddle(l, &a, &b)
 
 		firsthalf := mysort(a)
@@ -191,28 +191,28 @@ func mysort(l *SortedLinkedList) *SortedLinkedList {
 
 		var x *SortedLinkedList = firsthalf
 		var y *SortedLinkedList = secondhalf
-		var merged *SortedLinkedList = &SortedLinkedList{val: 0, next: nil}
+		var merged *SortedLinkedList = &SortedLinkedList{Val: 0, Next: nil}
 		head := merged
 		for x != nil && y != nil {
-			if (*x).val < (*y).val {
-				(merged).next = &SortedLinkedList{val: (*x).val, next: nil}
-				merged = merged.next
-				x = x.next
+			if (*x).Val < (*y).Val {
+				(merged).Next = &SortedLinkedList{Val: (*x).Val, Next: nil}
+				merged = merged.Next
+				x = x.Next
 			} else {
-				(merged).next = &SortedLinkedList{val: (*y).val, next: nil}
-				merged = merged.next
-				y = y.next
+				(merged).Next = &SortedLinkedList{Val: (*y).Val, Next: nil}
+				merged = merged.Next
+				y = y.Next
 			}
 
 		}
 		if x != nil {
-			merged.next = x
+			merged.Next = x
 
 		} else if y != nil {
-			merged.next = y
+			merged.Next = y
 		}
 
-		return (head.next)
+		return (head.Next)
 	}
 	return l
 
@@ -220,27 +220,27 @@ func mysort(l *SortedLinkedList) *SortedLinkedList {
 func (l *SortedLinkedList) sort() *SortedLinkedList {
 	*l = *mysort(l)
 
-	var h *SortedLinkedList = &SortedLinkedList{val: 0, next: nil}
+	var h *SortedLinkedList = &SortedLinkedList{Val: 0, Next: nil}
 	var head *SortedLinkedList = h
 	for l != nil {
-		h.next = &SortedLinkedList{val: l.val, next: nil}
-		h = h.next
-		l = l.next
+		h.Next = &SortedLinkedList{Val: l.Val, Next: nil}
+		h = h.Next
+		l = l.Next
 	}
-	return head.next
+	return head.Next
 }
 
-func (l *SortedLinkedList) add(val int) {
+func (l *SortedLinkedList) add(Val int) {
 	var prev *SortedLinkedList = l
-	for l != nil && (*l).val < val {
+	for l != nil && (*l).Val < Val {
 		prev = l
-		l = l.next
+		l = l.Next
 	}
 
 	if l != nil {
-		(*prev).next = &SortedLinkedList{val: val, next: (*prev).next}
+		(*prev).Next = &SortedLinkedList{Val: Val, Next: (*prev).Next}
 	} else {
-		(prev).next = &SortedLinkedList{val: val, next: nil}
+		(prev).Next = &SortedLinkedList{Val: Val, Next: nil}
 	}
 
 }
@@ -248,7 +248,7 @@ func (l *SortedLinkedList) add(val int) {
 func (l *SortedLinkedList) delete(index int) {
 
 	if index == 0 {
-		c := ((*l).next)
+		c := ((*l).Next)
 		*l = *c
 		return
 	}
@@ -256,16 +256,16 @@ func (l *SortedLinkedList) delete(index int) {
 	var prev *SortedLinkedList
 	for i := 0; i < index; i++ {
 		prev = n
-		n = (*n).next
+		n = (*n).Next
 	}
-	(*prev).next = (*n).next
+	(*prev).Next = (*n).Next
 
 }
 func (l *SortedLinkedList) display() {
 	fmt.Println()
 	for l != nil {
-		fmt.Printf("%d ", (*l).val)
-		l = l.next
+		fmt.Printf("%d ", (*l).Val)
+		l = l.Next
 	}
 }
 
@@ -275,11 +275,11 @@ func (l *SortedLinkedList) extractMax() int {
 	var i int
 	head := *l
 	for l != nil {
-		if max < l.val {
-			max = l.val
+		if max < l.Val {
+			max = l.Val
 			index = i
 		}
-		l = l.next
+		l = l.Next
 		i++
 
 	}
@@ -290,7 +290,7 @@ func (l *SortedLinkedList) extractMax() int {
 
 func (l *SortedLinkedList) extractMin() int {
 
-	min := (*l).val
+	min := (*l).Val
 
 	return min
 

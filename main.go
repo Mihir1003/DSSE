@@ -1,11 +1,14 @@
 package main
 
-import "fmt"
-import "github.com/mihir1003/DSSE/Data_Structures"
+import (
+	"fmt"
+	"github.com/mihir1003/DSSE/BinaryTrees"
+	"github.com/mihir1003/DSSE/Lists"
+)
 
 func main() {
 
-	myList := &Lists.LinkedList{val: 5, next: nil}
+	myList := &Lists.LinkedList{Val: 5, Next: nil}
 
 	myList.add(5)
 
@@ -22,7 +25,7 @@ func main() {
 	myList.display()
 	myListSorted.display()
 
-	myTree := Data_Structures.ItemBinarySearchTree{}
+	myTree := BinaryTrees.ItemBinarySearchTree{}
 	myTree.Insert(4, 1)
 	myTree.Insert(9, 1)
 	myTree.Insert(10, 6)
