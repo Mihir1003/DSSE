@@ -15,15 +15,15 @@ type SortedLinkedList struct {
 }
 
 type list interface {
-	add(int)
-	delete(int)
-	display()
-	sort()
-	extractMax()
-	extractMin()
+	Add(int)
+	Delete(int)
+	Display()
+	Sort()
+	ExtractMax()
+	ExtractMin()
 }
 
-func (l *LinkedList) extractMax() int {
+func (l *LinkedList) ExtractMax() int {
 	var max int
 	var index int
 	var i int
@@ -37,12 +37,12 @@ func (l *LinkedList) extractMax() int {
 		i++
 
 	}
-	(head).delete(index)
+	(head).Delete(index)
 	return max
 
 }
 
-func (l *LinkedList) extractMin() int {
+func (l *LinkedList) ExtractMin() int {
 	var min int
 	var index int
 	var i int
@@ -56,21 +56,21 @@ func (l *LinkedList) extractMin() int {
 		i++
 
 	}
-	(head).delete(index)
+	(head).Delete(index)
 	return min
 
 }
 
-func (l *LinkedList) add(Val int) {
+func (l *LinkedList) Add(Val int) {
 	if (*l).Next != nil {
-		(*l).Next.add(Val)
+		(*l).Next.Add(Val)
 	} else {
 		(*l).Next = &LinkedList{Val: Val, Next: nil}
 	}
 
 }
 
-func (l *LinkedList) delete(index int) {
+func (l *LinkedList) Delete(index int) {
 
 	if index == 0 {
 		c := ((*l).Next)
@@ -86,7 +86,7 @@ func (l *LinkedList) delete(index int) {
 	(*prev).Next = (*n).Next
 
 }
-func (l *LinkedList) display() {
+func (l *LinkedList) Display() {
 	fmt.Println()
 	for l != nil {
 		fmt.Printf("%d ", (*l).Val)
@@ -109,15 +109,15 @@ func findMiddle(l *LinkedList, a **LinkedList, b **LinkedList) {
 
 }
 
-func sort(l *LinkedList) *LinkedList {
+func Sort(l *LinkedList) *LinkedList {
 
 	if l.Next != nil {
 		var a *LinkedList
 		var b *LinkedList = &LinkedList{Val: 1, Next: nil}
 		findMiddle(l, &a, &b)
 
-		firsthalf := sort(a)
-		secondhalf := sort(b)
+		firsthalf := Sort(a)
+		secondhalf := Sort(b)
 
 		var x *LinkedList = firsthalf
 		var y *LinkedList = secondhalf
@@ -147,8 +147,8 @@ func sort(l *LinkedList) *LinkedList {
 	return l
 
 }
-func (l *LinkedList) sort() *SortedLinkedList {
-	*l = *sort(l)
+func (l *LinkedList) Sort() *SortedLinkedList {
+	*l = *Sort(l)
 
 	var h *SortedLinkedList = &SortedLinkedList{Val: 0, Next: nil}
 	var head *SortedLinkedList = h
@@ -179,15 +179,15 @@ func myfindMiddle(l *SortedLinkedList, a **SortedLinkedList, b **SortedLinkedLis
 
 }
 
-func mysort(l *SortedLinkedList) *SortedLinkedList {
+func mySort(l *SortedLinkedList) *SortedLinkedList {
 
 	if l.Next != nil {
 		var a *SortedLinkedList
 		var b *SortedLinkedList = &SortedLinkedList{Val: 1, Next: nil}
 		myfindMiddle(l, &a, &b)
 
-		firsthalf := mysort(a)
-		secondhalf := mysort(b)
+		firsthalf := mySort(a)
+		secondhalf := mySort(b)
 
 		var x *SortedLinkedList = firsthalf
 		var y *SortedLinkedList = secondhalf
@@ -217,8 +217,8 @@ func mysort(l *SortedLinkedList) *SortedLinkedList {
 	return l
 
 }
-func (l *SortedLinkedList) sort() *SortedLinkedList {
-	*l = *mysort(l)
+func (l *SortedLinkedList) Sort() *SortedLinkedList {
+	*l = *mySort(l)
 
 	var h *SortedLinkedList = &SortedLinkedList{Val: 0, Next: nil}
 	var head *SortedLinkedList = h
@@ -230,7 +230,7 @@ func (l *SortedLinkedList) sort() *SortedLinkedList {
 	return head.Next
 }
 
-func (l *SortedLinkedList) add(Val int) {
+func (l *SortedLinkedList) Add(Val int) {
 	var prev *SortedLinkedList = l
 	for l != nil && (*l).Val < Val {
 		prev = l
@@ -245,7 +245,7 @@ func (l *SortedLinkedList) add(Val int) {
 
 }
 
-func (l *SortedLinkedList) delete(index int) {
+func (l *SortedLinkedList) Delete(index int) {
 
 	if index == 0 {
 		c := ((*l).Next)
@@ -261,7 +261,7 @@ func (l *SortedLinkedList) delete(index int) {
 	(*prev).Next = (*n).Next
 
 }
-func (l *SortedLinkedList) display() {
+func (l *SortedLinkedList) Display() {
 	fmt.Println()
 	for l != nil {
 		fmt.Printf("%d ", (*l).Val)
@@ -269,7 +269,7 @@ func (l *SortedLinkedList) display() {
 	}
 }
 
-func (l *SortedLinkedList) extractMax() int {
+func (l *SortedLinkedList) ExtractMax() int {
 	var max int
 	var index int
 	var i int
@@ -283,12 +283,12 @@ func (l *SortedLinkedList) extractMax() int {
 		i++
 
 	}
-	(head).delete(index)
+	(head).Delete(index)
 	return max
 
 }
 
-func (l *SortedLinkedList) extractMin() int {
+func (l *SortedLinkedList) ExtractMin() int {
 
 	min := (*l).Val
 
