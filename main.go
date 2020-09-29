@@ -10,20 +10,20 @@ func main() {
 
 	myList := &Lists.LinkedList{Val: 5, Next: nil}
 
-	myList.add(5)
+	myList.Add(5)
 
-	myList.add(9)
+	myList.Add(9)
 
-	myList.add(6)
+	myList.Add(6)
 
-	myList.add(7)
+	myList.Add(7)
 
-	myList.delete(0)
+	myList.Delete(0)
 
-	myListSorted := myList.sort()
-	fmt.Println((*myList).extractMin())
-	myList.display()
-	myListSorted.display()
+	myListSorted := myList.Sort()
+	fmt.Println((*myList).ExtractMin())
+	myList.Display()
+	myListSorted.Display()
 
 	myTree := BinaryTrees.ItemBinarySearchTree{}
 	myTree.Insert(4, 1)
