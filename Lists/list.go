@@ -73,11 +73,11 @@ func (l *LinkedList) Add(Val int) {
 func (l *LinkedList) Delete(index int) {
 
 	if index == 0 {
-		c := ((*l).Next)
+		c := (*l).Next
 		*l = *c
 		return
 	}
-	var n *LinkedList = l
+	var n = l
 	var prev *LinkedList
 	for i := 0; i < index; i++ {
 		prev = n
@@ -113,15 +113,15 @@ func Sort(l *LinkedList) *LinkedList {
 
 	if l.Next != nil {
 		var a *LinkedList
-		var b *LinkedList = &LinkedList{Val: 1, Next: nil}
+		var b = &LinkedList{Val: 1, Next: nil}
 		findMiddle(l, &a, &b)
 
 		firsthalf := Sort(a)
 		secondhalf := Sort(b)
 
-		var x *LinkedList = firsthalf
-		var y *LinkedList = secondhalf
-		var merged *LinkedList = &LinkedList{Val: 0, Next: nil}
+		var x = firsthalf
+		var y = secondhalf
+		var merged = &LinkedList{Val: 0, Next: nil}
 		head := merged
 		for x != nil && y != nil {
 			if (*x).Val < (*y).Val {
@@ -142,7 +142,7 @@ func Sort(l *LinkedList) *LinkedList {
 			merged.Next = y
 		}
 
-		return (head.Next)
+		return head.Next
 	}
 	return l
 
@@ -150,8 +150,8 @@ func Sort(l *LinkedList) *LinkedList {
 func (l *LinkedList) Sort() *SortedLinkedList {
 	*l = *Sort(l)
 
-	var h *SortedLinkedList = &SortedLinkedList{Val: 0, Next: nil}
-	var head *SortedLinkedList = h
+	h := &SortedLinkedList{Val: 0, Next: nil}
+	var head = h
 	for l != nil {
 		h.Next = &SortedLinkedList{Val: l.Val, Next: nil}
 		h = h.Next

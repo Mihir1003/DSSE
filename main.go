@@ -8,9 +8,7 @@ import (
 
 func main() {
 
-	myList := &Lists.LinkedList{Val: 5, Next: nil}
-
-	myList.Add(5)
+	myList := &Lists.LinkedList{}
 
 	myList.Add(9)
 
