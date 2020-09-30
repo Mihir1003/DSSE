@@ -92,6 +92,7 @@ func (l *LinkedList) Display() {
 		fmt.Printf("%d ", (*l).Val)
 		l = l.Next
 	}
+	fmt.Println()
 }
 func findMiddle(l *LinkedList, a **LinkedList, b **LinkedList) {
 	slow := l

@@ -106,6 +106,7 @@ func (l *SortedLinkedList) Display() {
 		fmt.Printf("%d ", (*l).Val)
 		l = l.Next
 	}
+	fmt.Println()
 }
 
 func (l *SortedLinkedList) ExtractMax() int {
