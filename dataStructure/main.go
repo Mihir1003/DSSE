@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	BinaryTrees "github.com/mihir1003/DSSE/dataStructure/BinaryTrees"
-	Lists "github.com/mihir1003/DSSE/dataStructure/Lists"
+	BinaryTrees "main/BinaryTrees"
+
+	Lists "main/Lists"
 )
 
 func main() {
