@@ -1,8 +1,8 @@
-package compete
+package main
 
 import (
-	"api/data"
 	"fmt"
+	"github.com/mihir1003/DSSE/api/data"
 )
 
 func compete(ops *data.Operations) {

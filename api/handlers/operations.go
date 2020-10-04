@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"api/data"
+	"github.com/mihir1003/dsse/compete"
 	"log"
 )
 
@@ -53,5 +54,6 @@ func (p *Operations) receiveOperations(rw http.ResponseWriter, r *http.Request) 
 	if err != nil {
 		http.Error(rw, "Unable to unmarshal json", http.StatusBadRequest)
 	}
+	compete.compete
 
 }
