@@ -1,10 +1,9 @@
-package main
+package dataStructures
 
 import (
+	BinaryTrees "dataStructures/BinaryTrees"
+	Lists "dataStructures/Lists"
 	"fmt"
-	BinaryTrees "main/BinaryTrees"
-
-	Lists "main/Lists"
 )
 
 func main() {
