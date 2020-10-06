@@ -10,7 +10,7 @@ type Operation struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
-	Frequency   int    `json:"-"`
+	Frequency   int    `json:"frequency"`
 }
 
 // Products is a collection of Product

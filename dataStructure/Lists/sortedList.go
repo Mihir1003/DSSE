@@ -71,9 +71,10 @@ func (l *SortedLinkedList) Sort() *SortedLinkedList {
 
 func (l *SortedLinkedList) Add(Val int) {
 	var prev *SortedLinkedList = l
+	cur := l
 	for l != nil && (*l).Val < Val {
-		prev = l
-		l = l.Next
+		prev = cur
+		cur = l.Next
 	}
 
 	if l != nil {

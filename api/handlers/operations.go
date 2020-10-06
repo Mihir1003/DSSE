@@ -2,11 +2,14 @@ package handlers
 
 import (
 	"api/data"
-	"github.com/mihir1003/DSSE/dataStructures/BinaryTrees"
+	"encoding/json"
+	"time"
+
+	"io"
+
 	"github.com/mihir1003/DSSE/dataStructure/Lists"
 
 	"log"
-	"time"
 )
 
 import "net/http"
@@ -56,17 +59,24 @@ func (p *Operations) receiveOperations(rw http.ResponseWriter, r *http.Request) 
 	err := op.FromJSON(r.Body)
 	if err != nil {
 		http.Error(rw, "Unable to unmarshal json", http.StatusBadRequest)
-	}else {
+	} else {
 		rw.WriteHeader(http.StatusOK)
 
 		//_,e:=rw.Write(strs)
 		//if e !=nil {
 		//	http.Error(rw,"Invalid request",http.StatusBadRequest)
 		//}
+		p.l.Println(op)
+		parsed := parse(op)
+		structures := compete(parsed, *p)
+
+		b := structures.ToJSON(rw)
+		p.l.Println(string(b))
+		//if e!=nil{
+		//	http.Error(rw,"operations invalid",http.StatusInternalServerError)
+		//}
 
 	}
-
-
 
 }
 
@@ -75,69 +85,92 @@ func parse(ops *data.Operations) []string {
 	for _, element := range *ops {
 		switch element.Name {
 		case "add":
-			list = append(list, "add")
+
+			for i := 0; i < element.Frequency; i++ {
+				list = append(list, "add")
+
+			}
 		case "delete":
-			list = append(list, "delete")
+			for i := 0; i < element.Frequency; i++ {
+				list = append(list, "delete")
+			}
 		case "extractMin":
-			list = append(list, "extractMin")
+			for i := 0; i < element.Frequency; i++ {
+				list = append(list, "extractMin")
+			}
 		case "extractMax":
-			list=append(list,"extractMax")
+			for i := 0; i < element.Frequency; i++ {
+				list = append(list, "extractMax")
+			}
 		}
 	}
 	return list
 }
 
-type empty interface {
-
+type das interface {
+	Add(int)
+	Delete(int)
+	ExtractMin() int
+	ExtractMax() int
 }
 
 type dataStructure struct {
-	name string
-	time time.Duration
-	structure empty
-
+	Name      string `json:"name"`
+	Time      string `json:"time"`
+	structure das
 }
 
-type dataStructures []dataStructure
+func (o *dataStructures) ToJSON(w io.Writer) []byte {
+	//e := json.NewEncoder(w)
+	//return e.Encode(o)
+	b, e := json.Marshal(o)
+	if e == nil {
+		_, e := w.Write(b)
+		if e != nil {
 
-func compete(ops []string) dataStructures {
-	listDataStructures:=dataStructures{dataStructure{
-		name: "list",
-		time: 0,
-		structure: Lists.LinkedList{
+		}
+	}
+	return b
+}
+
+type dataStructures []*dataStructure
+
+func compete(ops []string, o Operations) dataStructures {
+	listDataStructures := dataStructures{&dataStructure{
+		Name: "list",
+		Time: "initial",
+		structure: &Lists.LinkedList{
 			Val:  0,
 			Next: nil,
 		},
 	},
-	dataStructure{
-		name: "sortedList",
-		time: 0,
-		structure: Lists.SortedLinkedList{
-		Val:  0,
-		Next: nil,
-	},
-	},
-	dataStructure{
-		name: "binaryTree",
-		time: 0,
-		structure: BinaryTrees.ItemBinarySearchTree{root:nill}
-	},
-	}
-	for _,ds := range listDataStructures {
-		for _,o := ops{
+		&dataStructure{
+			Name: "sortedList",
+			Time: "initial",
+			structure: &Lists.SortedLinkedList{
+				Val:  0,
+				Next: nil,
+			},
+		}}
+	for _, ds := range listDataStructures {
+		start := time.Now()
+		for i, o := range ops {
 			switch o {
 			case "add":
-				ds.add(0)
+				ds.structure.Add(i)
 			case "delete":
-				list = append(list, "delete")
+				ds.structure.Delete(0)
 			case "extractMin":
-				list = append(list, "extractMin")
+				ds.structure.ExtractMax()
 			case "extractMax":
-				list=append(list,"extractMax")
+				ds.structure.ExtractMax()
 			}
 		}
+
+		ds.Time = time.Since(start).String()
+		o.l.Println(ds)
+
 	}
 
-
+	return listDataStructures
 }
-

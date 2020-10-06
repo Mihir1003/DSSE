@@ -62,11 +62,10 @@ func (l *LinkedList) ExtractMin() int {
 }
 
 func (l *LinkedList) Add(Val int) {
-	if (*l).Next != nil {
-		(*l).Next.Add(Val)
-	} else {
-		(*l).Next = &LinkedList{Val: Val, Next: nil}
+	for (*l).Next != nil {
+		l = (*l).Next
 	}
+	(*l).Next = &LinkedList{Val: Val, Next: nil}
 
 }
 
