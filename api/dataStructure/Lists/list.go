@@ -44,19 +44,18 @@ func (l *LinkedList) ExtractMax() int {
 
 func (l *LinkedList) ExtractMin() int {
 	var min int
-	var index int
 	var i int
-	head := *l
+
 	for l != nil {
 		if min > l.Val {
 			min = l.Val
-			index = i
+
 		}
 		l = l.Next
 		i++
 
 	}
-	(head).Delete(index)
+
 	return min
 
 }
@@ -70,7 +69,7 @@ func (l *LinkedList) Add(Val int) {
 }
 
 func (l *LinkedList) Delete(index int) {
-
+	index = 0
 	if index == 0 {
 		c := (*l).Next
 		*l = *c

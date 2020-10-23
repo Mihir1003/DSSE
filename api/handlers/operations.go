@@ -2,12 +2,13 @@ package handlers
 
 import (
 	"api/data"
+	"api/dataStructure/BinaryTrees"
 	"encoding/json"
 	"time"
 
 	"io"
 
-	"github.com/mihir1003/DSSE/dataStructure/Lists"
+	"api/dataStructure/Lists"
 
 	"log"
 )
@@ -23,6 +24,10 @@ func NewOperations(l *log.Logger) *Operations {
 }
 
 func (o *Operations) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Access-Control-Allow-Origin", "*")
+	rw.Header().Set("Access-Control-Allow-Headers", "Content-Type,access-control-allow-origin, access-control-allow-headers")
+	rw.Header().Set("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS")
+
 	if r.Method == http.MethodGet {
 		o.getOperations(rw, r)
 		return
@@ -30,6 +35,11 @@ func (o *Operations) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
 		o.receiveOperations(rw, r)
+		return
+	}
+
+	if r.Method == "OPTIONS" {
+		rw.WriteHeader(http.StatusOK)
 		return
 	}
 
@@ -151,7 +161,25 @@ func compete(ops []string, o Operations) dataStructures {
 				Val:  0,
 				Next: nil,
 			},
-		}}
+		},
+		&dataStructure{
+			Name: "binaryTree",
+			Time: "initial",
+			structure: &BinaryTrees.ItemBinarySearchTree{
+				Root: &BinaryTrees.Node{Left: nil, Right: nil},
+			},
+		},
+		&dataStructure{
+			Name: "AVLTree",
+			Time: "initial",
+			structure: &BinaryTrees.AvlNode{
+				Elem:   0,
+				Left:   nil,
+				Right:  nil,
+				Height: 0,
+			},
+		},
+	}
 	for _, ds := range listDataStructures {
 		start := time.Now()
 		for i, o := range ops {
@@ -159,7 +187,7 @@ func compete(ops []string, o Operations) dataStructures {
 			case "add":
 				ds.structure.Add(i)
 			case "delete":
-				ds.structure.Delete(0)
+				ds.structure.Delete(i)
 			case "extractMin":
 				ds.structure.ExtractMax()
 			case "extractMax":

@@ -71,13 +71,13 @@ func (l *SortedLinkedList) Sort() *SortedLinkedList {
 
 func (l *SortedLinkedList) Add(Val int) {
 	var prev *SortedLinkedList = l
-	cur := l
-	for l != nil && (*l).Val < Val {
-		prev = cur
-		cur = l.Next
+	cur := &l
+	for (*cur).Next != nil && (*cur).Val < Val {
+		prev = *cur
+		cur = &(*cur).Next
 	}
 
-	if l != nil {
+	if cur != nil {
 		(*prev).Next = &SortedLinkedList{Val: Val, Next: (*prev).Next}
 	} else {
 		(prev).Next = &SortedLinkedList{Val: Val, Next: nil}
@@ -86,9 +86,9 @@ func (l *SortedLinkedList) Add(Val int) {
 }
 
 func (l *SortedLinkedList) Delete(index int) {
-
+	index = 0
 	if index == 0 {
-		c := ((*l).Next)
+		c := (*l).Next
 		*l = *c
 		return
 	}
@@ -98,7 +98,9 @@ func (l *SortedLinkedList) Delete(index int) {
 		prev = n
 		n = (*n).Next
 	}
-	(*prev).Next = (*n).Next
+	if prev != nil {
+		(*prev).Next = (*n).Next
+	}
 
 }
 func (l *SortedLinkedList) Display() {
@@ -112,19 +114,19 @@ func (l *SortedLinkedList) Display() {
 
 func (l *SortedLinkedList) ExtractMax() int {
 	var max int
-	var index int
+
 	var i int
-	head := *l
+
 	for l != nil {
 		if max < l.Val {
 			max = l.Val
-			index = i
+
 		}
 		l = l.Next
 		i++
 
 	}
-	(head).Delete(index)
+
 	return max
 
 }

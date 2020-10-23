@@ -7,10 +7,8 @@ import (
 
 // Product defines the structure for an API product
 type Operation struct {
-	ID          int    `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Frequency   int    `json:"frequency"`
+	Name      string `json:"name"`
+	Frequency int    `json:"frequency"`
 }
 
 // Products is a collection of Product
@@ -40,27 +38,22 @@ func GetOperations() Operations {
 // example data source
 var operationList = []*Operation{
 	&Operation{
-		ID:          1,
-		Name:        "add",
-		Description: "add element to the data structure",
-		Frequency:   0,
+
+		Name:      "add",
+		Frequency: 0,
 	},
 	&Operation{
-		ID:          2,
-		Name:        "delete",
-		Description: "delete element to the data structure",
-		Frequency:   0,
+
+		Name:      "delete",
+		Frequency: 0,
 	},
 	&Operation{
-		ID:          3,
-		Name:        "extractMin",
-		Description: "extract the min element from data structure",
-		Frequency:   0,
+
+		Name:      "extractMin",
+		Frequency: 0,
 	},
 	&Operation{
-		ID:          4,
-		Name:        "extraxctMax",
-		Description: "extract the max element from data structure",
-		Frequency:   0,
+		Name:      "extractMax",
+		Frequency: 0,
 	},
 }
