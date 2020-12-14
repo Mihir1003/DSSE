@@ -184,6 +184,9 @@ func (tree *AvlNode) find(x int) *AvlNode {
 	//can not found or empty tree
 	return nil
 }
+func (tree *AvlNode) Find(x int) int {
+	return tree.find(x).Elem
+}
 
 //find min elem in the tree
 func (tree *AvlNode) ExtractMin() int {

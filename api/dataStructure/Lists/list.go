@@ -21,6 +21,18 @@ type list interface {
 	Sort()
 	ExtractMax()
 	ExtractMin()
+	Find()
+}
+
+func (l *LinkedList) Find(x int) int {
+	for (*l).Next != nil {
+		if l.Val == x {
+			return l.Val
+		}
+		l = (*l).Next
+
+	}
+	return -1
 }
 
 func (l *LinkedList) ExtractMax() int {

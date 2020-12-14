@@ -56,4 +56,8 @@ var operationList = []*Operation{
 		Name:      "extractMax",
 		Frequency: 0,
 	},
+	&Operation{
+		Name:      "find",
+		Frequency: 0,
+	},
 }

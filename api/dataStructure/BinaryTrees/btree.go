@@ -72,20 +72,25 @@ func (bst *ItemBinarySearchTree) ExtractMax() int {
 }
 
 // Search returns true if the Item t exists in the tree
-func (bst *ItemBinarySearchTree) Search(Key int) bool {
-	return search(bst.Root, Key)
+func (bst *ItemBinarySearchTree) Find(Key int) int {
+	if find(bst.Root, Key) == true {
+		return 1
+	} else {
+		return -1
+	}
+
 }
 
 // internal recursive function to search an item in the tree
-func search(n *Node, Key int) bool {
+func find(n *Node, Key int) bool {
 	if n == nil {
 		return false
 	}
 	if Key < n.Key {
-		return search(n.Left, Key)
+		return find(n.Left, Key)
 	}
 	if Key > n.Key {
-		return search(n.Right, Key)
+		return find(n.Right, Key)
 	}
 	return true
 }

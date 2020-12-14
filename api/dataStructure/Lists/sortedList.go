@@ -17,6 +17,16 @@ func myfindMiddle(l *SortedLinkedList, a **SortedLinkedList, b **SortedLinkedLis
 	slow.Next = nil
 
 }
+func (l *SortedLinkedList) Find(x int) int {
+	for (*l).Next != nil {
+		if l.Val == x {
+			return l.Val
+		}
+		l = (*l).Next
+
+	}
+	return -1
+}
 
 func mySort(l *SortedLinkedList) *SortedLinkedList {
 

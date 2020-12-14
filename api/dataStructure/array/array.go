@@ -1,40 +1,50 @@
 package array
 
-type array struct {
-	array []int
+type Array struct {
+	Array []int
 }
 
-func (arr *array) add(num int) {
-	(*arr).array = append((*arr).array, num)
+func (arr *Array) Add(num int) {
+	(*arr).Array = append((*arr).Array, num)
 }
 
-func (arr *array) delete(index int) {
-	(*arr).array = append((*arr).array[:index], (*arr).array[index+1:]...)
-}
-
-func (arr *array) extractMin() int {
-	min := (*arr).array[0]
-	for _, x := range (*arr).array {
-		if x < min {
-			min = x
-		}
+func (arr *Array) Delete(index int) {
+	if index < len(arr.Array) {
+		(*arr).Array = append((*arr).Array[:index], (*arr).Array[index+1:]...)
 	}
-	return min
+
 }
 
-func (arr *array) extractMax() int {
-	max := (*arr).array[0]
-	for _, x := range (*arr).array {
-		if x > max {
-			max = x
+func (arr *Array) ExtractMin() int {
+	if len(arr.Array) > 0 {
+		min := (*arr).Array[0]
+		for _, x := range (*arr).Array {
+			if x < min {
+				min = x
+			}
 		}
+		return min
 	}
-	return max
+	return -1
 }
 
-func (arr *array) search(num int) int {
+func (arr *Array) ExtractMax() int {
+	if len(arr.Array) > 0 {
+		max := (*arr).Array[0]
+		for _, x := range (*arr).Array {
+			if x > max {
+				max = x
+			}
+		}
+		return max
+	}
+	return -1
 
-	for i, x := range (*arr).array {
+}
+
+func (arr *Array) Find(num int) int {
+
+	for i, x := range (*arr).Array {
 		if x == num {
 			return i
 		}

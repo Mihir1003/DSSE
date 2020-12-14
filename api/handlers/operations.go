@@ -3,6 +3,7 @@ package handlers
 import (
 	"api/data"
 	"api/dataStructure/BinaryTrees"
+	"api/dataStructure/array"
 	"encoding/json"
 	"time"
 
@@ -122,6 +123,7 @@ type das interface {
 	Delete(int)
 	ExtractMin() int
 	ExtractMax() int
+	Find(int) int
 }
 
 type dataStructure struct {
@@ -179,6 +181,20 @@ func compete(ops []string, o Operations) dataStructures {
 				Height: 0,
 			},
 		},
+		&dataStructure{
+			Name: "array",
+			Time: "initial",
+			structure: &array.Array{
+				Array: []int{},
+			},
+		},
+		&dataStructure{
+			Name: "sortedArray",
+			Time: "initial",
+			structure: &array.SortedArray{
+				Array: []int{},
+			},
+		},
 	}
 	for _, ds := range listDataStructures {
 		start := time.Now()
@@ -192,6 +208,9 @@ func compete(ops []string, o Operations) dataStructures {
 				ds.structure.ExtractMax()
 			case "extractMax":
 				ds.structure.ExtractMax()
+			case "find":
+				var j int = i / 2
+				ds.structure.Find(j)
 			}
 		}
 

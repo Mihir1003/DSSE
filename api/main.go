@@ -2,12 +2,10 @@ package main
 
 import (
 	"context"
-	//"fmt"
 	"log"
 	"os"
 	"os/signal"
 	"time"
-	//"dataStructures/array"
 )
 import "net/http"
 import handlers "api/handlers"
@@ -16,22 +14,6 @@ import "github.com/nicholasjackson/env"
 var bindAddress = env.String("BIND_ADDRESS", false, ":9090", "Bind address for the server")
 
 func main() {
-	//arr:= array{array: []int{}}
-	//arr.add(5)
-	//arr.add(5)
-	//arr.add(5)
-	//arr.add(5)
-	//arr.add(5)
-	//arr.add(5)
-	//arr.add(5)
-	//arr.add(5)
-	//arr.delete(1)
-	//arr.delete(1)
-	//arr.delete(1)
-	//arr.delete(1)
-	//arr.delete(1)
-	//fmt.Println(arr)
-
 	env.Parse()
 
 	l := log.New(os.Stdout, "products-api ", log.LstdFlags)
